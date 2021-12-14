@@ -1,0 +1,67 @@
+1.G Dilihat dari ERD, menurut saya sudah optimal, tetapi untuk table Users untuk parameters created_by dan updated_by alangkah baiknya default nya nullable
+    karena ketika saya buat function register terdapat code yang berulang untuk menyimpan parameters created_by dan updated_by
+
+Dokumen teknis Data Manipulation Language (DML) :
+1.C Laporan omzet
+    SELECT SUM(bill_total) AS Omzet FROM Transactions
+      INNER JOIN Merchants ON Transactions.merchant_id = Merchants.id
+      WHERE Transactions.merchant_id = $merchant_id
+      WHERE Merchants.user_id = Auth::user()->id
+
+  Laporan nama merchant
+    SELECT Merchants.merchant_name, Transactions.bill_total FROM Transactions
+      INNER JOIN Merchants ON Transactions.merchant_id = Merchants.id
+      WHERE Transactions.merchant_id = $merchant_id
+      WHERE Merchants.user_id = Auth::user()->id
+      WHERE Transactions.created_at BETWEEN 2021-11-01 00:00:00 AND 2021-11-30 23:59:59
+      LIMIT 20 OFFFSET 20
+
+
+1.D Laporan omzet
+    SELECT SUM(bill_total) AS Omzet FROM Transactions
+      INNER JOIN Merchants ON Transactions.merchant_id = Merchants.id
+      WHERE Transactions.merchant_id = $merchant_id
+      WHERE Merchants.user_id = Auth::user()->id
+
+  Laporan nama merchant
+    SELECT Merchants.merchant_name, Transactions.bill_total, Outlets.outlet_name FROM Transactions
+      INNER JOIN Merchants ON Transactions.merchant_id = Merchants.id
+      INNER JOIN Outlets ON Transactions.outlet_id = Outlets.id
+      WHERE Transactions.merchant_id = $merchant_id
+      WHERE Merchants.user_id = Auth::user()->id
+      WHERE Transactions.created_at BETWEEN 2021-11-01 00:00:00 AND 2021-11-30 23:59:59
+      LIMIT 20 OFFFSET 20
+
+2. pada line 16 : return "false"; , menurut saya return nya adalah false
+
+3. - Pseudocode kasus pertama :
+      $bil = 0;
+      $x = 5;
+      for($y = 1; $y<=$x, $y++){
+        $Bil = $bil + 2;
+        echo($Bil);
+      }
+   - Pseudocode kasus kedua :
+        $bil = 5;
+        for($y = 1; $y<=$x, $y=$y++){
+          $Bil = $bil + 3;
+          echo($Bil);
+      }
+4. -  Pseudocode sorting descending :
+      $numbers = array(4, -7, -5, 3, 3.3, 9, 0, 10, 0.2);
+      rsort($numbers);
+      $arrlength = count($numbers);
+      for($x = 0; $x < $arrlength; $x++) {
+        echo $numbers[$x];
+        echo "<br>";
+      }
+
+   -  Pseudocode sorting ascending :
+      $numbers = array(4, -7, -5, 3, 3.3, 9, 0, 10, 0.2);
+      sort($numbers);
+
+      $arrlength = count($numbers);
+      for($x = 0; $x < $arrlength; $x++) {
+        echo $numbers[$x];
+        echo "<br>";
+      }
